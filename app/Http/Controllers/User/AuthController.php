@@ -22,11 +22,7 @@ class AuthController extends Controller
                 'user_phone' => 'sometimes|string|max:20'
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreurs de validation',
-                'errors' => $e->errors()
-            ], 422);
+            return $this->ApiResponse(422, null, json_encode($e->errors()));
         }
 
         // Envoie des données utilisateur vers le models User pour enregistrement
@@ -42,7 +38,8 @@ class AuthController extends Controller
 
         // Création du token utilisateur
         $token = $user->createToken('authToken')->plainTextToken;
-        return response()->json(['token' => $token, 'user' => $user]);
+        // return response()->json(['token' => $token, 'user' => $user]);
+        return $this->ApiResponse(0, $user, 'Utilisateur inscrit avec succès');
     }
 
 

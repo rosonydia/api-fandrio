@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Api\Utilisateur;
 
-class userController extends Controller
+class UserController extends Controller
 {
     public function store(Request $request) {
 
